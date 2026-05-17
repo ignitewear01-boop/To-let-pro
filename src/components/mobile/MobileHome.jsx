@@ -1060,7 +1060,7 @@ const MobileHome = () => {
           {/* Search button */}
           <button
             onClick={handleSearch}
-            className="w-full inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#ba0036] to-[#d4143a] text-white font-black uppercase tracking-widest text-[13px] py-3.5 rounded-2xl shadow-[0_10px_28px_-10px_rgba(186,0,54,0.6)] active:scale-[0.98] transition-transform"
+            className="w-full inline-flex items-center justify-center gap-2 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white font-black uppercase tracking-widest text-[13px] py-3.5 rounded-2xl shadow-[0_10px_28px_-10px_rgba(27,133,83,0.6)] active:scale-[0.98] transition-transform"
           >
             <Search size={16} strokeWidth={2.5} />
             {t.mobSearchProperties}
@@ -1118,7 +1118,7 @@ const MobileHome = () => {
           </p>
           <button
             onClick={() => setActiveArea(null)}
-            className="mt-4 inline-flex items-center gap-1.5 bg-[#ba0036] text-white text-[12px] font-black px-4 py-2 rounded-full active:scale-95 transition-transform"
+            className="mt-4 inline-flex items-center gap-1.5 bg-emerald-500 hover:bg-emerald-600 text-white text-[12px] font-black px-4 py-2 rounded-full active:scale-95 transition-transform"
           >
             {t.mobClearFilters} <ArrowRight size={13} />
           </button>

@@ -750,7 +750,7 @@ const PropertyCard = ({ property, navigate, t, showToast, isHighlighted, onHover
 								e.stopPropagation();
 								onInquire(property);
 							}}
-							className="flex-1 sm:flex-none px-8 py-3 rounded-xl bg-brandRed hover:bg-[#a0002e] text-white text-xs font-black shadow-[0_10px_20px_rgba(186,0,54,0.2)] hover:shadow-[0_15px_30px_rgba(186,0,54,0.3)] hover:-translate-y-0.5 active:scale-95 transition-all flex items-center justify-center gap-1.5">
+							className="flex-1 sm:flex-none px-8 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-black shadow-[0_10px_20px_rgba(27,133,83,0.2)] hover:shadow-[0_15px_30px_rgba(27,133,83,0.3)] hover:-translate-y-0.5 active:scale-95 transition-all flex items-center justify-center gap-1.5">
 							<MessageCircle size={13} />
 							{t.inquireBtn || "Inquire"}
 						</button>
@@ -1044,7 +1044,7 @@ const MapMiniCard = ({ property, navigate, onClose, onInquire, t }) => {
 						onClose();
 						onInquire(property);
 					}}
-					className="absolute bottom-3 right-3 px-3 py-1.5 rounded-lg bg-brandRed text-white text-[11px] font-black active:scale-95 transition-transform flex items-center gap-1 shadow-md"
+					className="absolute bottom-3 right-3 px-3 py-1.5 rounded-lg bg-emerald-500 hover:bg-emerald-600 text-white text-[11px] font-black active:scale-95 transition-transform flex items-center gap-1 shadow-md"
 				>
 					<MessageCircle size={11} /> {t?.inquireBtn || "INQUIRE"}
 				</button>
@@ -1303,11 +1303,16 @@ const PropertyListing = () => {
 			{/* MOBILE TOP BAR */}
 			<div className={`bg-white border-b border-gray-100 sticky top-0 md:top-[72px] z-30 shadow-sm transition-opacity duration-300 ${isStickyFilter ? "opacity-0 pointer-events-none" : "opacity-100"}`}>
 				<div className="lg:hidden max-w-[1400px] mx-auto px-4 h-16 flex items-center justify-between gap-3">
-					<span className="text-sm font-bold text-gray-900 truncate">
-						{searchArea ? searchArea.charAt(0).toUpperCase() + searchArea.slice(1) : formattedDivision} {t.properties || "Properties"}
-					</span>
+					<div className="flex flex-col min-w-0">
+						<span className="text-sm font-black text-gray-900 truncate leading-tight">
+							{searchArea ? searchArea.charAt(0).toUpperCase() + searchArea.slice(1) : formattedDivision}
+						</span>
+						<span className="text-[11px] font-bold text-emerald-600 leading-tight mt-0.5">
+							<strong className="font-black">{filteredProperties.length}</strong> {filteredProperties.length === 1 ? (t.property || "property") : (t.properties || "properties")}
+						</span>
+					</div>
 					<div className="flex items-center gap-2 shrink-0">
-						<button onClick={() => setViewMode((v) => (v === "map" ? "list" : "map"))} className={`flex items-center gap-1.5 px-3 py-2 rounded-full text-xs font-black transition-all active:scale-95 ${isMapMode ? "bg-brandRed text-white shadow-md" : "bg-gray-100 text-gray-700 hover:bg-red-50 hover:text-brandRed"}`}>
+						<button onClick={() => setViewMode((v) => (v === "map" ? "list" : "map"))} className={`flex items-center gap-1.5 px-3 py-2 rounded-full text-xs font-black transition-all active:scale-95 ${isMapMode ? "bg-emerald-500 text-white shadow-md" : "bg-gray-100 text-gray-700 hover:bg-emerald-50 hover:text-emerald-600"}`}>
 							{isMapMode ? <List size={14} /> : <Map size={14} />}
 							{isMapMode ? "List" : "Map"}
 						</button>
@@ -1369,7 +1374,7 @@ const PropertyListing = () => {
 							<div className="relative mb-4">
 								<input type="text" value={searchArea} onChange={(e) => setSearchArea(e.target.value)} placeholder={t.searchAreaPlaceholder || "Search area..."} className="w-full bg-gray-50 border border-gray-100 rounded-xl py-3 pl-10 pr-24 text-xs font-bold focus:border-brandRed outline-none" />
 								<Search size={14} className="absolute left-3.5 top-3.5 text-gray-400" />
-								<button onClick={handleNearestMe} disabled={isLocating} className="absolute right-2 top-2 bg-white border border-gray-200 shadow-sm text-[9px] font-black uppercase text-brandRed px-2 py-1 rounded-lg flex items-center gap-1 hover:bg-red-50 transition-colors">
+								<button onClick={handleNearestMe} disabled={isLocating} className="absolute right-2 top-2 bg-white border border-gray-200 shadow-sm text-[9px] font-black uppercase text-emerald-600 px-2 py-1 rounded-lg flex items-center gap-1 hover:bg-emerald-50 transition-colors">
 									<Navigation size={10} className={isLocating ? "animate-spin" : ""} /> {isLocating ? t.locating || "Locating" : t.nearMe || "Near Me"}
 								</button>
 							</div>
@@ -1665,11 +1670,12 @@ const PropertyListing = () => {
 									</div>
 								)}
 
-								{/* MOBILE: single-column horizontal cards (image left, info right).
-								    Easier to read than the previous cramped 2-col grid and matches
-								    the OYO/airbnb list-view pattern. */}
+								{/* MOBILE: single-column compact horizontal cards.
+								    Designed for density — image left, info right with an inline
+								    Inquire CTA next to the price. Roughly ~120px tall per card so
+								    ~6 cards fit on a typical phone viewport (vs. ~3-4 previously). */}
 								{filteredProperties.length > 0 && (
-									<div className="flex flex-col gap-3 pb-10 md:hidden">
+									<div className="flex flex-col gap-2 pb-10 md:hidden">
 										{filteredProperties.map((property) => {
 											const catLabel = RENTAL_CATEGORIES.find((c) => c.id === property.rentalCategory);
 											const catText = (catLabel?.tKey && t[catLabel.tKey]) || catLabel?.label || "Property";
@@ -1678,75 +1684,71 @@ const PropertyListing = () => {
 												<div
 													key={property.id}
 													onClick={() => navigate(`/property/${property.id}`)}
-													className="bg-white rounded-2xl border border-gray-100 overflow-hidden shadow-sm active:scale-[0.99] transition-transform cursor-pointer"
+													className="bg-white rounded-xl border border-gray-100 overflow-hidden shadow-sm active:scale-[0.99] transition-transform cursor-pointer"
 												>
 													<div className="flex">
-														{/* Photo */}
-														<div className="relative w-[130px] h-[130px] shrink-0 bg-gray-100">
+														{/* Photo (compact, with verified + discount overlays) */}
+														<div className="relative w-[108px] h-[108px] shrink-0 bg-gray-100">
 															<img
 																src={property.images[0]}
 																alt={property.title}
+																loading="lazy"
 																className="absolute inset-0 w-full h-full object-cover"
 															/>
 															{property.verified && (
-																<div className="absolute top-1.5 left-1.5 bg-white/95 backdrop-blur-sm px-1.5 py-0.5 rounded-md text-[8px] font-black text-brandRed flex items-center gap-0.5">
-																	<ShieldCheck size={8} /> Verified
+																<div className="absolute top-1 left-1 bg-white/95 backdrop-blur-sm px-1 py-0.5 rounded text-[8px] font-black text-emerald-600 flex items-center gap-0.5">
+																	<ShieldCheck size={8} strokeWidth={2.5} /> {t.verified || "Verified"}
 																</div>
 															)}
-															<button
-																onClick={(e) => {
-																	e.stopPropagation();
-																	handleSave(e, property);
-																}}
-																aria-label="Save"
-																className="absolute top-1.5 right-1.5 p-1.5 bg-white/95 backdrop-blur-sm rounded-full hover:bg-white transition-all">
-																<Heart size={11} className="text-gray-700" />
-															</button>
+															{property.originalPrice > property.price && (
+																<span className="absolute bottom-1 left-1 bg-emerald-500 text-white text-[8px] font-black uppercase tracking-wider px-1.5 py-0.5 rounded shadow-sm">
+																	{discountPercent}% {t.offText || "OFF"}
+																</span>
+															)}
 														</div>
 
-														{/* Info */}
-														<div className="flex-1 min-w-0 p-3 flex flex-col">
-															<p className="text-[9px] font-black text-brandRed uppercase tracking-widest line-clamp-1">{catText}</p>
-															<h4 className="text-[13px] font-black text-gray-900 leading-tight line-clamp-2 mt-0.5">{property.title}</h4>
-															<p className="text-[10px] text-gray-500 font-bold flex items-center gap-1 line-clamp-1 mt-1">
-																<MapPin size={10} className="shrink-0" /> {property.location}
-															</p>
-															<div className="mt-auto flex items-baseline gap-1.5 pt-2">
-																<span className="text-base font-black text-gray-900">৳{(property.price / 1000).toFixed(0)}k</span>
-																<span className="text-[10px] text-gray-500 font-bold">/{t.monthText || "mo"}</span>
-																{property.originalPrice > property.price && (
-																	<span className="ml-auto bg-green-100 text-green-700 text-[9px] font-black px-1.5 py-0.5 rounded">{discountPercent}% {t.offText || "OFF"}</span>
-																)}
+														{/* Info column — title, location, stats, price + inline Inquire CTA */}
+														<div className="flex-1 min-w-0 p-2.5 flex flex-col">
+															<div className="flex items-start justify-between gap-2">
+																<p className="text-[9px] font-black text-emerald-600 uppercase tracking-widest line-clamp-1 flex-1">{catText}</p>
+																<button
+																	onClick={(e) => {
+																		e.stopPropagation();
+																	handleSave(e, property);
+																}}
+																	aria-label="Save"
+																	className="p-1 -m-1 active:scale-90 transition-transform shrink-0">
+																	<Heart size={14} className="text-gray-400" />
+																</button>
 															</div>
-															<div className="flex items-center gap-2.5 text-[10px] font-bold text-gray-500 mt-1.5 pt-1.5 border-t border-gray-100">
-																<span className="flex items-center gap-1"><BedDouble size={10} /> {property.beds}</span>
-																<span className="flex items-center gap-1"><Bath size={10} /> {property.baths}</span>
-																<span className="flex items-center gap-1"><Square size={10} /> {property.sqft}</span>
-																<span className="ml-auto flex items-center gap-1">
+															<h4 className="text-[13px] font-black text-gray-900 leading-tight line-clamp-1 mt-0.5">{property.title}</h4>
+															<p className="text-[10px] text-gray-500 font-bold flex items-center gap-1 line-clamp-1 mt-0.5">
+																<MapPin size={9} className="shrink-0" /> {property.location}
+															</p>
+															<div className="flex items-center gap-2 text-[10px] font-bold text-gray-500 mt-1">
+																<span className="flex items-center gap-0.5"><BedDouble size={10} /> {property.beds}</span>
+																<span className="flex items-center gap-0.5"><Bath size={10} /> {property.baths}</span>
+																<span className="flex items-center gap-0.5"><Square size={10} /> {property.sqft}</span>
+																<span className="ml-auto flex items-center gap-0.5">
 																	<Star size={10} className="fill-yellow-400 text-yellow-400" /> {property.rating}
 																</span>
 															</div>
+															<div className="mt-auto flex items-center justify-between gap-2 pt-1.5">
+																<div className="min-w-0 leading-tight">
+																	<span className="text-[15px] font-black text-gray-900">৳{(property.price / 1000).toFixed(0)}k</span>
+																	<span className="text-[10px] text-gray-500 font-bold ml-0.5">/{t.monthText || "mo"}</span>
+																</div>
+																<button
+																	onClick={(e) => {
+																		e.stopPropagation();
+																	openInquiry(property);
+																}}
+																	aria-label={t.inquireBtn || "Inquire"}
+																	className="shrink-0 px-2.5 py-1.5 rounded-lg bg-emerald-500 hover:bg-emerald-600 text-white text-[11px] font-black active:scale-95 transition-all flex items-center gap-1 shadow-[0_4px_12px_rgba(27,133,83,0.25)]">
+																	<MessageCircle size={11} /> {t.inquireBtn || "Inquire"}
+																</button>
+															</div>
 														</div>
-													</div>
-
-													{/* CTAs */}
-													<div className="px-3 pb-3 grid grid-cols-2 gap-2 -mt-1">
-														<button
-															onClick={(e) => {
-																e.stopPropagation();
-																navigate(`/property/${property.id}`);
-															}}
-															className="py-2 rounded-lg text-[11px] font-black text-gray-700 bg-gray-50 border border-gray-100 active:scale-95 transition-transform">
-															{t.detailsBtn || "Details"}
-														</button>
-														<button
-															onClick={(e) => {
-																e.stopPropagation();
-																openInquiry(property);
-															}}
-															className="py-2 rounded-lg bg-brandRed text-white text-[11px] font-black active:scale-95 transition-transform flex items-center justify-center gap-1 shadow-sm">
-															<MessageCircle size={11} /> {t.inquireBtn || "Inquire"}
-														</button>
 													</div>
 												</div>
 											);

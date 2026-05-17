@@ -1714,8 +1714,8 @@ const PropertyListing = () => {
 																<button
 																	onClick={(e) => {
 																		e.stopPropagation();
-																	handleSave(e, property);
-																}}
+																		handleSave(e, property);
+																	}}
 																	aria-label="Save"
 																	className="p-1 -m-1 active:scale-90 transition-transform shrink-0">
 																	<Heart size={14} className="text-gray-400" />
@@ -1741,8 +1741,8 @@ const PropertyListing = () => {
 																<button
 																	onClick={(e) => {
 																		e.stopPropagation();
-																	openInquiry(property);
-																}}
+																		openInquiry(property);
+																	}}
 																	aria-label={t.inquireBtn || "Inquire"}
 																	className="shrink-0 px-2.5 py-1.5 rounded-lg bg-emerald-500 hover:bg-emerald-600 text-white text-[11px] font-black active:scale-95 transition-all flex items-center gap-1 shadow-[0_4px_12px_rgba(27,133,83,0.25)]">
 																	<MessageCircle size={11} /> {t.inquireBtn || "Inquire"}

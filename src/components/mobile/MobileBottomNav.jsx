@@ -129,17 +129,17 @@ const MobileBottomNav = ({ hideOnRoutes }) => {
           }`}
         >
           {active && (
-            <span className="absolute inset-0 rounded-full bg-[#ba0036]/10 ring-2 ring-[#ba0036]/15" />
+            <span className="absolute inset-0 rounded-full bg-emerald-500/10 ring-2 ring-emerald-500/15" />
           )}
           <Icon
             size={20}
             strokeWidth={active ? 2.6 : 2.1}
-            className={`relative ${active ? 'text-[#ba0036]' : 'text-gray-500'}`}
+            className={`relative ${active ? 'text-emerald-600' : 'text-gray-500'}`}
           />
         </span>
         <span
           className={`text-[10px] font-bold transition-colors ${
-            active ? 'text-[#ba0036]' : 'text-gray-500'
+            active ? 'text-emerald-600' : 'text-gray-500'
           }`}
         >
           {item.label}
@@ -169,12 +169,12 @@ const MobileBottomNav = ({ hideOnRoutes }) => {
             <div className="flex-1 h-full flex flex-col items-center justify-end relative pb-1">
               <button
                 onClick={() => navigate('/list-property')}
-                className="absolute -top-5 w-14 h-14 rounded-2xl bg-gradient-to-br from-[#ba0036] via-[#d4143a] to-[#ff4d6d] text-white flex items-center justify-center shadow-[0_12px_30px_-8px_rgba(186,0,54,0.55)] active:scale-95 transition-transform ring-4 ring-white"
+                className="absolute -top-5 w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-600 via-emerald-500 to-emerald-400 text-white flex items-center justify-center shadow-[0_12px_30px_-8px_rgba(27,133,83,0.55)] active:scale-95 transition-transform ring-4 ring-white"
                 aria-label="List a property"
               >
                 <PlusCircle size={26} strokeWidth={2.2} />
               </button>
-              <span className="text-[9px] font-black uppercase tracking-widest text-[#ba0036]">
+              <span className="text-[9px] font-black uppercase tracking-widest text-emerald-600">
                 List
               </span>
             </div>

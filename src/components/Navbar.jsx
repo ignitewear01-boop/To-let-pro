@@ -425,7 +425,7 @@ useEffect(() => {
                   const slug = navLoc.trim() ? navLoc.trim().toLowerCase().replace(/,?\s+/g, '-') : 'all';
                   navigate(`/properties/${slug}?category=${navType.id}`);
                 }}
-                className="shrink-0 m-1.5 bg-[#ba0036] hover:bg-[#a0002d] text-white px-5 py-2 rounded-full font-black text-xs flex items-center gap-1.5 transition-all active:scale-95 whitespace-nowrap shadow-[0_6px_18px_rgba(186,0,54,0.3)] border-none"
+                className="shrink-0 m-1.5 bg-emerald-500 hover:bg-emerald-600 text-white px-5 py-2 rounded-full font-black text-xs flex items-center gap-1.5 transition-all active:scale-95 whitespace-nowrap shadow-[0_6px_18px_rgba(27,133,83,0.3)] border-none"
               >
                 <Search size={13} /> Search
               </button>
@@ -435,8 +435,8 @@ useEffect(() => {
           <div className={`hidden md:flex items-center gap-3 text-sm font-bold text-gray-700 ${(isScrolled || compactHeader) ? '' : 'ml-auto'}`}>
             
             {/* List Property Desktop Button (Always Visible) */}
-            <button onClick={() => handleProtected('/list-property')} className="relative flex items-center gap-2 overflow-hidden px-4 py-2 rounded-xl font-black text-xs whitespace-nowrap transition-all active:scale-95 group shadow-[0_4px_18px_rgba(186,0,54,0.28)] hover:shadow-[0_8px_26px_rgba(186,0,54,0.42)] hover:-translate-y-0.5" style={{background:'linear-gradient(135deg,#ba0036 0%,#e8004e 60%,#ba0036 100%)'}}>
-              <span className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{background:'linear-gradient(135deg,#d4004a 0%,#ff1a5e 60%,#d4004a 100%)'}} />
+            <button onClick={() => handleProtected('/list-property')} className="relative flex items-center gap-2 overflow-hidden px-4 py-2 rounded-xl font-black text-xs whitespace-nowrap transition-all active:scale-95 group shadow-[0_4px_18px_rgba(27,133,83,0.28)] hover:shadow-[0_8px_26px_rgba(27,133,83,0.42)] hover:-translate-y-0.5" style={{background:'linear-gradient(135deg,#136B41 0%,#1B8553 60%,#136B41 100%)'}}>
+              <span className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{background:'linear-gradient(135deg,#1B8553 0%,#22a060 60%,#1B8553 100%)'}} />
               <span className="relative z-10 flex items-center gap-2 text-white">
                 <span className="w-5 h-5 rounded-lg bg-white/20 flex items-center justify-center shrink-0">
                   <PlusCircle size={13} className="text-white" />
@@ -515,7 +515,7 @@ useEffect(() => {
                   )}
                 </>
               ) : (
-                <Link to="/login" className="bg-[#ba0036] text-white px-5 py-2 rounded-xl font-bold text-xs lg:text-sm shadow-[0_8px_20px_rgba(186,0,54,0.25)] hover:bg-[#a0002d] hover:shadow-[0_10px_25px_rgba(186,0,54,0.35)] transition-all active:scale-95 flex items-center gap-2 border-none">
+                <Link to="/login" className="bg-emerald-500 text-white px-5 py-2 rounded-xl font-bold text-xs lg:text-sm shadow-[0_8px_20px_rgba(27,133,83,0.25)] hover:bg-emerald-600 hover:shadow-[0_10px_25px_rgba(27,133,83,0.35)] transition-all active:scale-95 flex items-center gap-2 border-none">
                 <User size={16} /> {t?.login || 'Login / Signup'}
               </Link>
               )}
@@ -690,7 +690,7 @@ useEffect(() => {
             </div>
             <button
               onClick={() => { setIsMobileSearchOpen(false); const slug = mobileNavLoc.trim() ? mobileNavLoc.trim().toLowerCase().replace(/,?\s+/g, '-') : 'all'; navigate(`/properties/${slug}?category=${navType.id}`); }}
-              className="shrink-0 bg-[#ba0036] hover:bg-[#a0002d] text-white px-4 py-2.5 rounded-full font-black text-xs flex items-center gap-1.5 transition-all active:scale-95 shadow-[0_6px_18px_rgba(186,0,54,0.3)] border-none"
+              className="shrink-0 bg-emerald-500 hover:bg-emerald-600 text-white px-4 py-2.5 rounded-full font-black text-xs flex items-center gap-1.5 transition-all active:scale-95 shadow-[0_6px_18px_rgba(27,133,83,0.3)] border-none"
             >
               <Search size={14} /> Go
             </button>

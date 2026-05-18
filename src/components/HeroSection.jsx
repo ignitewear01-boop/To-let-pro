@@ -481,7 +481,7 @@ const HeroSection = () => {
             <button
               type="button"
               onClick={handleSearch}
-              className="w-full mt-3 bg-[#ba0036] hover:bg-[#a0002d] text-white py-3.5 rounded-full font-black text-sm uppercase tracking-widest active:scale-95 transition-all flex items-center justify-center gap-2 shadow-[0_8px_24px_rgba(186,0,54,0.35)] border-none"
+              className="w-full mt-3 bg-emerald-500 hover:bg-emerald-600 text-white py-3.5 rounded-full font-black text-sm uppercase tracking-widest active:scale-95 transition-all flex items-center justify-center gap-2 shadow-[0_8px_24px_rgba(27,133,83,0.35)] border-none"
             >
               <Search size={15} /> {t?.searchProperties || 'Search Properties'}
             </button>
@@ -673,7 +673,7 @@ const HeroSection = () => {
               <div className="pl-2.5 shrink-0">
                 <button
                   onClick={handleSearch}
-                  className="h-[56px] bg-[#ba0036] hover:bg-[#a0002d] text-white px-8 rounded-full font-black text-sm uppercase tracking-widest active:scale-95 flex items-center justify-center gap-2 transition-all shadow-[0_10px_24px_rgba(186,0,54,0.35)]"
+                  className="h-[56px] bg-emerald-500 hover:bg-emerald-600 text-white px-8 rounded-full font-black text-sm uppercase tracking-widest active:scale-95 flex items-center justify-center gap-2 transition-all shadow-[0_10px_24px_rgba(27,133,83,0.35)]"
                 >
                   <Search size={16} /> {t?.searchBtn || 'Search'}
                 </button>
@@ -753,7 +753,7 @@ const HeroSection = () => {
                 </div>
                 <button
                   onClick={() => navigate('/download')}
-                  className="bg-[#ba0036] hover:bg-[#d4004a] text-white px-7 py-3.5 rounded-full font-black text-xs uppercase tracking-widest shadow-[0_8px_24px_rgba(186,0,54,0.45)] hover:scale-105 active:scale-95 transition-all flex items-center gap-2"
+                  className="bg-emerald-500 hover:bg-emerald-600 text-white px-7 py-3.5 rounded-full font-black text-xs uppercase tracking-widest shadow-[0_8px_24px_rgba(27,133,83,0.45)] hover:scale-105 active:scale-95 transition-all flex items-center gap-2"
                 >
                   <Zap size={13} /> {t?.getApp || 'Get the App'}
                 </button>
